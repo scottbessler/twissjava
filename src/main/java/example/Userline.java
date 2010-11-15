@@ -1,8 +1,8 @@
 package example;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import example.models.Timeline;
 import example.models.Tweet;
@@ -16,7 +16,6 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
-import org.wyki.cassandra.pelops.UuidHelper;
 
 /**
  * This is the typical twitter page. A form for submitting a 140-character
@@ -121,7 +120,7 @@ public class Userline extends HomePage {
         }
         @Override
         public void onSubmit() {
-            saveTweet(new Tweet(UuidHelper.newTimeUuid().toString().getBytes(), username, tweetbody));
+            saveTweet(new Tweet(UUID.randomUUID(), username, tweetbody));
             setResponsePage(getPage().getClass());
         }
     }

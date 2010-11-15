@@ -1,5 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+        <repositories>
+          <repository> <id>riptano</id>
+          <name>riptano</name>
+          <url>http://mvn.riptano.com/content/repositories/public/</url> </repository>
+        </repositories>
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>example</groupId>
 	<artifactId>twissjava</artifactId>
@@ -20,6 +26,12 @@
 		</license>
 	</licenses>
 	<dependencies>
+		<dependency>
+			<groupId>me.prettyprint</groupId>
+			<artifactId>hector</artifactId>
+			<version>0.7.0-19_11082010</version>
+		</dependency>
+
 		<!--  WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>

@@ -10,20 +10,12 @@ Setup:
  + Install Cassandra 0.6 from http://cassandra.apache.org/ as well
     as its dependencies (Thrift). 
    + Copy the storage_conf.xml over the default configuration
- + Install Wicket with default packages and structure:
-   `mvn archetype:create 
-     -DarchetypeGroupId=org.apache.wicket 
-     -DarchetypeArtifactId=wicket-archetype-quickstart 
-     -DarchetypeVersion=1.4.9 
-     -DgroupId=example 
-     -DartifactId=twissjava`
- + Replace default files in the Wicket hierarchy with Twissjava 
-    files from this checkout.
- + Include Pelops as a library from http://code.google.com/p/pelops/
+ + check out twissjava
 
-Start:
+Run:
  + Start bin/cassandra
- + java src/test/java/example/Start.java (starts Jetty, our appserver)
+ + run `mvn jetty:run`
+   + maven will download a ton of stuff.  this is normal.
    + NOTE: Jetty uses port 8080 by default, which is used for JMX
        for Cassandra. Start.java in this checkout has it changed to 8888.
- + localhost:8888
+ + browse to http://localhost:8888

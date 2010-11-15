@@ -1,21 +1,22 @@
 package example.models;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 
 public class Tweet implements Serializable
 {
-    private byte[] key;
-    private String uname;
-    private String body;
+    private final UUID key;
+    private final String uname;
+    private final String body;
 
-    public Tweet(final byte[] key, final String uname, final String body) {
+    public Tweet(UUID key, String uname, String body) {
         this.key = key;
         this.uname = uname;
         this.body = body;
     }
 
-    public byte[] getKey() {
+    public UUID getKey() {
         return key;
     }
 

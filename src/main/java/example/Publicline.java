@@ -1,7 +1,6 @@
 package example;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import example.models.Timeline;
@@ -10,12 +9,9 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.model.PropertyModel;
-import org.wyki.cassandra.pelops.UuidHelper;
 
 /**
  * This is the default home page when not logged in.

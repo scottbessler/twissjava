@@ -2,6 +2,7 @@ package example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import example.models.User;
 import org.apache.wicket.MarkupContainer;
@@ -51,7 +52,7 @@ public class AddFriends extends Base {
         Form aff = new ActionFriendForm("actionfriend");
 
         String actiontext = "";
-        List<String> friendUnames = getFriendUnames(username);
+        Set<String> friendUnames = getFriendUnames(username);
         if (action.isVisible()) {
             if (friendUnames.contains(query)) {
                 actiontext = "Remove Friend ";
@@ -127,7 +128,7 @@ public class AddFriends extends Base {
         }
         @Override
         public void onSubmit() {
-            List<String> friendUnames = getFriendUnames(username);
+            Set<String> friendUnames = getFriendUnames(username);
             if (friendUnames.contains(query)) {
                 List<String> friendname = new ArrayList<String>();
                 friendname.add(query);

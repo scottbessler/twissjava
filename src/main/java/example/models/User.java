@@ -1,25 +1,23 @@
 package example.models;
 
 public class User {
-    private byte[] key;
-    private String password;
+    private final String name;
+    private final String password;
 
-    public User(final byte[] key, final String password) {
-        this.key = key;
-        //Do not store this in plain text.
+    public User(String name, String password) {
+        this.name = name;
         this.password = password;
     }
 
-    public byte[] getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public boolean comparePasswords(final String compare) {
-        //Make this a constant time comparison please.
+    public boolean comparePasswords(String compare) {
         return password.equals(compare);
     }
 }

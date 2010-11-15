@@ -109,7 +109,7 @@ public class Authorize extends Base {
                 setResponsePage(getPage().getClass(), new PageParameters("register=false"));
                 return;
             }
-            test = new User(new_username.getBytes(), password1);
+            test = new User(new_username, password1);
             saveUser(test);
             TwissSession s = (TwissSession) WebSession.get();
             s.authorize(new_username);
