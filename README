@@ -1,21 +1,21 @@
 TWISSJAVA: Twitter on Cassandra in Java.
 
-Deps:
- + Maven: this will load our build deps.
-   + Cassandra 0.6: the important thing.
-   + Pelops: this is how we talk to the important thing.
-   + Wicket: this is how we show other people the important thing.
+Prerequisites:
+ + Maven: this will load our build deps
+
 
 Setup:
- + Install Cassandra 0.6 from http://cassandra.apache.org/ as well
-    as its dependencies (Thrift). 
-   + Copy the storage_conf.xml over the default configuration
+ + Install Cassandra 0.7 from http://cassandra.apache.org/ 
  + check out twissjava
+   TODO MAKE THIS SUCK LESS:
+ * copy twissjava/cassandra.yaml over cassandra's cassandra.yaml
+ * run cassandra's bin/schematool localhost 8080 import
+   
 
 Run:
  + Start bin/cassandra
  + run `mvn jetty:run`
-   + maven will download a ton of stuff.  this is normal.
+   + maven will download a ton of stuff the first run.  this is normal.
    + NOTE: Jetty uses port 8080 by default, which is used for JMX
        for Cassandra. Start.java in this checkout has it changed to 8888.
  + browse to http://localhost:8888
