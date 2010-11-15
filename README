@@ -16,6 +16,4 @@ Run:
  + Start bin/cassandra
  + run `mvn jetty:run`
    + maven will download a ton of stuff the first run.  this is normal.
-   + NOTE: Jetty uses port 8080 by default, which is used for JMX
-       for Cassandra. Start.java in this checkout has it changed to 8888.
  + browse to http://localhost:8888
