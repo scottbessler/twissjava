@@ -183,12 +183,12 @@ public abstract class Base extends WebPage {
 
     public void saveTweet(Tweet tweet) {
         long timestamp = System.currentTimeMillis();
-
+        entityManagerFactory.createEntityManager().persist(tweet);
         //Insert the tweet into tweets cf
-        Mutator<UUID> m1 = HFactory.createMutator(keyspace, us);
-        m1.addInsertion(tweet.getKey(), TWEETS, HFactory.createStringColumn("uname", tweet.getUname()))
-          .addInsertion(tweet.getKey(), TWEETS, HFactory.createStringColumn("body", tweet.getBody()));
-        m1.execute();
+        //Mutator<UUID> m1 = HFactory.createMutator(keyspace, us);
+        //m1.addInsertion(tweet.getKey(), TWEETS, HFactory.createStringColumn("uname", tweet.getUname()))
+        //  .addInsertion(tweet.getKey(), TWEETS, HFactory.createStringColumn("body", tweet.getBody()));
+        //m1.execute();
         //Insert into the user's timeline and timeline
         Mutator<String> m2 = HFactory.createMutator(keyspace, ss);
         m2.addInsertion(tweet.getUname(), USERLINE, HFactory.createColumn(timestamp, tweet.getKey(), ls, us));

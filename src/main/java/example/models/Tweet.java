@@ -3,12 +3,21 @@ package example.models;
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Tweet")
 public class Tweet implements Serializable
 {
-    private final UUID key;
-    private final String uname;
-    private final String body;
+    @Id
+    private UUID key;
+    @Column(name="uname")
+    private String uname;
+    @Column(name="body")
+    private String body;
 
     public Tweet(UUID key, String uname, String body) {
         this.key = key;
@@ -27,4 +36,17 @@ public class Tweet implements Serializable
     public String getBody() {
         return body;
     }
+
+    public void setKey(UUID key) {
+      this.key = key;
+    }
+
+    public void setUname(String uname) {
+      this.uname = uname;
+    }
+
+    public void setBody(String body) {
+      this.body = body;
+    }
+    
 }
