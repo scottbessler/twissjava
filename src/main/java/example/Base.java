@@ -1,15 +1,19 @@
 package example;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
-import example.models.Timeline;
-import example.models.Tweet;
-import example.models.User;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import me.prettyprint.cassandra.serializers.LongSerializer;
 import me.prettyprint.cassandra.serializers.StringSerializer;
 import me.prettyprint.cassandra.serializers.UUIDSerializer;
-import me.prettyprint.cassandra.service.CassandraHostConfigurator;
 import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.Keyspace;
 import me.prettyprint.hector.api.beans.ColumnSlice;
@@ -20,15 +24,21 @@ import me.prettyprint.hector.api.mutation.Mutator;
 import me.prettyprint.hector.api.query.MultigetSliceQuery;
 import me.prettyprint.hector.api.query.QueryResult;
 import me.prettyprint.hector.api.query.SliceQuery;
+
+import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.CSSPackageResource;
 import org.apache.wicket.markup.html.WebPage;
-
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.protocol.http.WebSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.wicket.markup.html.basic.Label;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.ContextLoaderListener;
+
+import example.models.Timeline;
+import example.models.Tweet;
+import example.models.User;
 
 /**
  * Base contains both the default header/footer things for the UI as
@@ -37,10 +47,15 @@ import org.apache.wicket.markup.html.basic.Label;
 public abstract class Base extends WebPage {
     final static Logger log = LoggerFactory.getLogger(Base.class);
 
-    final static Cluster cluster = HFactory.createCluster("TwissjavaCluster",
-                                                          new CassandraHostConfigurator("localhost:9160"));
-    final static Keyspace keyspace = HFactory.createKeyspace("Twissjava", cluster);
+    final static Cluster cluster = 
+      (Cluster)ContextLoaderListener.getCurrentWebApplicationContext().getBean("twissjavaCluster");
     
+    final static Keyspace keyspace = 
+      (Keyspace)ContextLoaderListener.getCurrentWebApplicationContext().getBean("twissjavaKeyspace");
+    
+    final static EntityManagerFactory entityManagerFactory = 
+      (EntityManagerFactory)ContextLoaderListener.getCurrentWebApplicationContext().getBean("cassandraEntityManagerFactory");
+                                                          
     final static StringSerializer ss = StringSerializer.get();
     final static LongSerializer ls = LongSerializer.get();
     final static UUIDSerializer us = UUIDSerializer.get();
@@ -160,8 +175,10 @@ public abstract class Base extends WebPage {
 
     //Data Writing
     public void saveUser(User user) {
-        Mutator<String> mutator = HFactory.createMutator(keyspace, ss);
-        mutator.insert(user.getName(), USERS, HFactory.createStringColumn("password", user.getPassword()));
+        //Mutator<String> mutator = HFactory.createMutator(keyspace, ss);
+        //mutator.insert(user.getName(), USERS, HFactory.createStringColumn("password", user.getPassword()));
+      entityManagerFactory.createEntityManager().persist(user);
+      
     }
 
     public void saveTweet(Tweet tweet) {
